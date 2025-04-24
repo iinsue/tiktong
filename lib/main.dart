@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tiktong/screens/sign_up/sign_up_screen.dart';
+import 'package:tiktong/features/authentication/sign_up_screen.dart';
 
 void main() {
   runApp(const TikTongApp());
