@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/authentication/password_screen.dart';
 import 'package:tiktong/features/authentication/widgets/form_button.dart';
 
 class EmailScreen extends StatefulWidget {
@@ -11,61 +12,98 @@ class EmailScreen extends StatefulWidget {
 }
 
 class _EmailScreenState extends State<EmailScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
-  String _username = "";
+  String _email = "";
 
   @override
   void initState() {
     super.initState();
-    _usernameController.addListener(() {
+    _emailController.addListener(() {
       setState(() {
-        _username = _usernameController.text;
+        _email = _emailController.text;
       });
     });
   }
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     super.dispose();
+  }
+
+  String? _isEmailValid() {
+    if (_email.isEmpty) return null;
+    final regExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]+",
+    );
+
+    if (!regExp.hasMatch(_email)) {
+      return "EmailNot valid";
+    }
+
+    return null;
+  }
+
+  void _onScaffoldTap() {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onSubmit() {
+    if (_email.isEmpty || _isEmailValid() != null) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PasswordScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Sign up")),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Sizes.size36),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gaps.v40,
-            Text(
-              "What is your email?",
-              style: TextStyle(
-                fontSize: Sizes.size24,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Gaps.v16,
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                hintText: "Email",
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[400]!),
+    return GestureDetector(
+      onTap: _onScaffoldTap,
+      child: Scaffold(
+        appBar: AppBar(title: Text("Sign up")),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Sizes.size36),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gaps.v40,
+              Text(
+                "What is your email?",
+                style: TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w700,
                 ),
+              ),
+              Gaps.v16,
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                onEditingComplete: _onSubmit,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  errorText: _isEmailValid(),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey[400]!),
+                  ),
 
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[400]!),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey[400]!),
+                  ),
+                ),
+                cursorColor: Theme.of(context).primaryColor,
+              ),
+              Gaps.v16,
+              GestureDetector(
+                onTap: _onSubmit,
+                child: FormButton(
+                  disabled: _email.isEmpty || _isEmailValid() != null,
                 ),
               ),
-              cursorColor: Theme.of(context).primaryColor,
-            ),
-            Gaps.v16,
-            FormButton(disabled: _username.isEmpty),
-          ],
+            ],
+          ),
         ),
       ),
     );
