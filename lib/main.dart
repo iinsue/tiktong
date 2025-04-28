@@ -19,12 +19,17 @@ class TikTongApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
           elevation: 0,
           titleTextStyle: TextStyle(
             color: Colors.black,
             fontSize: Sizes.size16 + Sizes.size2,
             fontWeight: FontWeight.w600,
           ),
+        ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          surfaceTintColor: Colors.white,
+          color: Colors.white,
         ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Color(0xFFE9435A),
