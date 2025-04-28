@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/widgets/form_button.dart';
+import 'package:tiktong/features/onboarding/interests_screen.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -20,7 +21,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print(formData);
+
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => const InterestsScreen()));
     }
   }
 
