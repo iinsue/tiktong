@@ -153,6 +153,30 @@ class _VideoPostState extends State<VideoPost>
               ],
             ),
           ),
+
+          Positioned(
+            bottom: 20,
+            right: 10,
+            child: Column(
+              children: const [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  // 이미지 URL
+                  foregroundImage: NetworkImage(
+                    "https://avatars.githubusercontent.com/u/50567588?v=4",
+                  ),
+
+                  // 이미지 없을 때 보여지는 것
+                  child: Text(
+                    "인수",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
