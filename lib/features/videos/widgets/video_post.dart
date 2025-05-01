@@ -22,6 +22,10 @@ class _VideoPostState extends State<VideoPost> {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/video.mp4");
 
+  bool _isPaused = false;
+
+  final Duration _animationDuration = Duration(milliseconds: 200);
+
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
@@ -61,6 +65,9 @@ class _VideoPostState extends State<VideoPost> {
     } else {
       _videoPlayerController.play();
     }
+    setState(() {
+      _isPaused = !_isPaused;
+    });
   }
 
   @override
@@ -82,10 +89,14 @@ class _VideoPostState extends State<VideoPost> {
           Positioned.fill(
             child: IgnorePointer(
               child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.play,
-                  color: Colors.white,
-                  size: Sizes.size52,
+                child: AnimatedOpacity(
+                  opacity: _isPaused ? 1 : 0,
+                  duration: _animationDuration,
+                  child: FaIcon(
+                    FontAwesomeIcons.play,
+                    color: Colors.white,
+                    size: Sizes.size52,
+                  ),
                 ),
               ),
             ),
