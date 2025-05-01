@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/videos/widgets/video_button.dart';
+import 'package:tiktong/features/videos/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -93,6 +94,20 @@ class _VideoPostState extends State<VideoPost>
     });
   }
 
+  void _onCommentsTap(BuildContext context) async {
+    // 영상이 재생중이면 일시정지
+    if (_videoPlayerController.value.isPlaying) {
+      _onTogglePause();
+    }
+
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const VideoComments(),
+    );
+    _onTogglePause();
+  }
+
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
@@ -161,7 +176,7 @@ class _VideoPostState extends State<VideoPost>
             bottom: 20,
             right: 10,
             child: Column(
-              children: const [
+              children: [
                 CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.deepPurple,
@@ -180,7 +195,13 @@ class _VideoPostState extends State<VideoPost>
                 Gaps.v24,
                 VideoButton(icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
                 Gaps.v24,
-                VideoButton(icon: FontAwesomeIcons.solidComment, text: "33K"),
+                GestureDetector(
+                  onTap: () => _onCommentsTap(context),
+                  child: VideoButton(
+                    icon: FontAwesomeIcons.solidComment,
+                    text: "33K",
+                  ),
+                ),
                 Gaps.v24,
                 VideoButton(icon: FontAwesomeIcons.share, text: "Share"),
               ],
