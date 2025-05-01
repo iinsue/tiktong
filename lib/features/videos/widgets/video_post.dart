@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -174,6 +175,12 @@ class _VideoPostState extends State<VideoPost>
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.solidComment, text: "33K"),
+                Gaps.v24,
+                VideoButton(icon: FontAwesomeIcons.share, text: "Share"),
               ],
             ),
           ),
