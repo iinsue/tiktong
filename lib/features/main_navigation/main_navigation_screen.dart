@@ -3,6 +3,7 @@ import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/features/discover/discover_screen.dart';
+import 'package:tiktong/features/inbox/inbox_screen.dart';
 import 'package:tiktong/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktong/features/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktong/features/videos/video_timeline_screen.dart';
@@ -43,7 +44,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           Offstage(offstage: _selectedIndex != 0, child: VideoTimelineScreen()),
           Offstage(offstage: _selectedIndex != 1, child: DiscoverScreen()),
-          Offstage(offstage: _selectedIndex != 3, child: Container()),
+          Offstage(offstage: _selectedIndex != 3, child: InBoxScreen()),
           Offstage(offstage: _selectedIndex != 4, child: Container()),
         ],
       ),

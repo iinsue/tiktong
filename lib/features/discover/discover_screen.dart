@@ -18,13 +18,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     text: "Initial Text",
   );
 
-  void _onSearchChanged(String value) {
-    print(value);
-  }
+  // 검색 값이 변경될 때
+  void _onSearchChanged(String value) {}
 
-  void _onSearchSubmitted(String value) {
-    print(value);
-  }
+  // 검색 값이 제출될 때
+  void _onSearchSubmitted(String value) {}
 
   // 상단 탭바 누르면 포커스 해제
   void _onTap(int index) {
