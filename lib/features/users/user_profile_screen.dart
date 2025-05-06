@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/users/widgets/user_summary_column.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -15,100 +18,75 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          floating: true,
-          pinned: true,
-          snap: true,
-          stretch: true,
-          backgroundColor: Colors.teal,
-          collapsedHeight: 80,
-          expandedHeight: 200,
-          flexibleSpace: FlexibleSpaceBar(
-            stretchModes: [
-              StretchMode.blurBackground,
-              StretchMode.fadeTitle,
-              StretchMode.zoomBackground,
-            ],
-            background: Image.asset(
-              "assets/images/placeholder.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-          title: Text("Hello!"),
           centerTitle: true,
+          title: Text("인수"),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: FaIcon(FontAwesomeIcons.gear, size: Sizes.size20),
+            ),
+          ],
         ),
         SliverToBoxAdapter(
           child: Column(
-            children: [CircleAvatar(backgroundColor: Colors.red, radius: 20)],
-          ),
-        ),
-        SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate(
-            // 리스트 아이템 개수
-            childCount: 50,
-
-            (context, index) => Container(
-              color: Colors.amber[100 * (index % 9)],
-              child: Align(
-                alignment: Alignment.center,
-                child: Text("Item $index"),
+            children: [
+              CircleAvatar(
+                radius: 50,
+                foregroundColor: Colors.deepPurple,
+                foregroundImage: NetworkImage(
+                  "https://avatars.githubusercontent.com/u/50567588?v=4",
+                ),
+                child: Text("인수", style: TextStyle(color: Colors.white)),
               ),
-            ),
-          ),
-
-          // 리스트 아이템 높이
-          itemExtent: 100,
-        ),
-        SliverPersistentHeader(pinned: true, delegate: CustomDelegate()),
-        SliverGrid(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 50,
-            (context, index) => Container(
-              color: Colors.blue[100 * (index % 9)],
-              child: Align(
-                alignment: Alignment.center,
-                child: Text("Item $index"),
+              Gaps.v20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "@인수",
+                    style: TextStyle(
+                      fontSize: Sizes.size18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Gaps.h5,
+                  FaIcon(
+                    FontAwesomeIcons.solidCircleCheck,
+                    size: Sizes.size18,
+                    color: Colors.blue.shade500,
+                  ),
+                ],
               ),
-            ),
-          ),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100,
-            mainAxisSpacing: Sizes.size20,
-            crossAxisSpacing: Sizes.size20,
-            childAspectRatio: 1,
+              Gaps.v24,
+              SizedBox(
+                height: Sizes.size48,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    UserSummaryColumn(value: "97", title: "Following"),
+                    VerticalDivider(
+                      width: Sizes.size32,
+                      thickness: Sizes.size1,
+                      color: Colors.grey.shade500,
+                      indent: Sizes.size14,
+                      endIndent: Sizes.size14,
+                    ),
+                    UserSummaryColumn(value: "10M", title: "Followers"),
+                    VerticalDivider(
+                      width: Sizes.size32,
+                      thickness: Sizes.size1,
+                      color: Colors.grey.shade500,
+                      indent: Sizes.size14,
+                      endIndent: Sizes.size14,
+                    ),
+                    UserSummaryColumn(value: "194.3M", title: "Likes"),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ],
     );
-  }
-}
-
-class CustomDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      color: Colors.indigo,
-      child: FractionallySizedBox(
-        // 부모로부터 차지하는 높이 비율
-        heightFactor: 1,
-        child: Center(
-          child: Text("Title!", style: TextStyle(color: Colors.white)),
-        ),
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => 150;
-
-  @override
-  double get minExtent => 80;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }
