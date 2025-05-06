@@ -15,8 +15,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       slivers: [
         SliverAppBar(
           floating: true,
-          stretch: true,
           pinned: true,
+          snap: true,
+          stretch: true,
           backgroundColor: Colors.teal,
           collapsedHeight: 80,
           expandedHeight: 200,
@@ -35,7 +36,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           centerTitle: true,
         ),
         SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate((context, index) => Container()),
+          delegate: SliverChildBuilderDelegate(
+            // 리스트 아이템 개수
+            childCount: 50,
+
+            (context, index) => Container(
+              color: Colors.amber[100 * (index % 9)],
+              child: Align(
+                alignment: Alignment.center,
+                child: Text("Item $index"),
+              ),
+            ),
+          ),
+
+          // 리스트 아이템 높이
           itemExtent: 100,
         ),
       ],
