@@ -2,11 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/inbox/activity_screen.dart';
+import 'package:tiktong/features/inbox/chats_screen.dart';
 
-class InBoxScreen extends StatelessWidget {
+class InBoxScreen extends StatefulWidget {
   const InBoxScreen({super.key});
 
-  void _onDmPressed() {}
+  @override
+  State<InBoxScreen> createState() => _InBoxScreenState();
+}
+
+class _InBoxScreenState extends State<InBoxScreen> {
+  void _onDmPressed() {
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => ChatsScreen()));
+  }
 
   void _onActivityTap(BuildContext context) {
     Navigator.of(
