@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -8,12 +7,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text("Settings")),
-      body: Column(
-        children: [
-          CupertinoActivityIndicator(radius: 40),
-          CircularProgressIndicator(),
-        ],
-      ),
+      body: ListView(children: [AboutListTile(applicationName: "TikTong")]),
     );
   }
 }
