@@ -69,13 +69,15 @@ class _ActivityScreenState extends State<ActivityScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: GestureDetector(
           onTap: _toggleAnimations,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("All activity"),
-              Gaps.h6,
+              Gaps.h8,
               RotationTransition(
                 turns: _arrowAnimation,
                 child: FaIcon(FontAwesomeIcons.chevronDown, size: Sizes.size14),
