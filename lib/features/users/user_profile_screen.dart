@@ -89,25 +89,78 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                     Gaps.v14,
                     FractionallySizedBox(
-                      widthFactor: 0.33,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: Sizes.size12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(Sizes.size4),
+                      widthFactor: 0.6,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: Sizes.size12,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(Sizes.size4),
+                                ),
+                              ),
+                              child: Text(
+                                "Follow",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          "Follow",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                          Gaps.h10,
+                          Container(
+                            width: 48,
+                            height: 48,
+                            padding: EdgeInsets.all(Sizes.size8),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey.shade300,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(Sizes.size4),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [FaIcon(FontAwesomeIcons.youtube)],
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                          Gaps.h10,
+                          Container(
+                            width: Sizes.size48,
+                            height: Sizes.size48,
+                            padding: EdgeInsets.all(Sizes.size10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey.shade300,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(Sizes.size4),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.caretDown,
+                                  size: Sizes.size20,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+
                     Gaps.v14,
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: Sizes.size32),
@@ -158,18 +211,41 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   childAspectRatio: 9 / 14,
                 ),
                 itemBuilder:
-                    (context, index) => Column(
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 9 / 14,
-                          child: FadeInImage.assetNetwork(
+                    (context, index) => AspectRatio(
+                      aspectRatio: 9 / 14,
+                      child: Stack(
+                        children: [
+                          FadeInImage.assetNetwork(
+                            width: double.infinity,
+                            height: double.infinity,
                             fit: BoxFit.cover,
                             placeholder: "assets/images/placeholder.jpg",
                             image:
                                 "https://images.unsplash.com/photo-1745503262235-611b59926297?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            left: 2,
+                            bottom: 4,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.play_arrow_outlined,
+                                  color: Colors.white,
+                                  size: Sizes.size24,
+                                ),
+                                Gaps.h3,
+                                Text(
+                                  "4.1M",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Sizes.size16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
               ),
               Center(child: Text("Page Two")),
