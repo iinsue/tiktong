@@ -36,6 +36,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           title: Text("Hello!"),
           centerTitle: true,
         ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [CircleAvatar(backgroundColor: Colors.red, radius: 20)],
+          ),
+        ),
         SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate(
             // 리스트 아이템 개수
@@ -53,6 +58,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           // 리스트 아이템 높이
           itemExtent: 100,
         ),
+        SliverPersistentHeader(pinned: true, delegate: CustomDelegate()),
         SliverGrid(
           delegate: SliverChildBuilderDelegate(
             childCount: 50,
@@ -73,5 +79,36 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         ),
       ],
     );
+  }
+}
+
+class CustomDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Colors.indigo,
+      child: FractionallySizedBox(
+        // 부모로부터 차지하는 높이 비율
+        heightFactor: 1,
+        child: Center(
+          child: Text("Title!", style: TextStyle(color: Colors.white)),
+        ),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 150;
+
+  @override
+  double get minExtent => 80;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }
