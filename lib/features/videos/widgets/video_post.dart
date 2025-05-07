@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/gaps.dart';
@@ -31,6 +32,8 @@ class _VideoPostState extends State<VideoPost>
 
   bool _isPaused = false;
 
+  bool _isMuted = false;
+
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
@@ -48,6 +51,12 @@ class _VideoPostState extends State<VideoPost>
 
     // 영상 반복재생 설정 - Future를 반환하므로 await 추가
     await _videoPlayerController.setLooping(true);
+
+    // 웹일 경우 음소거
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+      _isMuted = true;
+    }
 
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
@@ -114,6 +123,20 @@ class _VideoPostState extends State<VideoPost>
       builder: (context) => const VideoComments(),
     );
     _onTogglePause();
+  }
+
+  void _onMuted() {
+    if (_isMuted) {
+      setState(() {
+        _isMuted = false;
+        _videoPlayerController.setVolume(100);
+      });
+    } else {
+      setState(() {
+        _isMuted = true;
+        _videoPlayerController.setVolume(0);
+      });
+    }
   }
 
   @override
@@ -199,6 +222,14 @@ class _VideoPostState extends State<VideoPost>
                     "인수",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                ),
+                Gaps.v24,
+                GestureDetector(
+                  onTap: _onMuted,
+                  child:
+                      _isMuted
+                          ? VideoButton(icon: Icons.volume_off, text: "Muted")
+                          : VideoButton(icon: Icons.volume_up, text: "UnMuted"),
                 ),
                 Gaps.v24,
                 VideoButton(icon: FontAwesomeIcons.solidHeart, text: "2.9M"),
