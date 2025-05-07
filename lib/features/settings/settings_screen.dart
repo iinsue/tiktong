@@ -8,6 +8,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  bool _notifications = false;
+
   Future<void> _showDatePicker() async {
     try {
       final date = await showDatePicker(
@@ -90,12 +92,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  void _onNotificationsChanged(bool? newValue) {
+    if (newValue == null) return;
+    setState(() {
+      _notifications = newValue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: Text("Settings")),
       body: ListView(
         children: [
+          SwitchListTile.adaptive(
+            value: _notifications,
+            onChanged: _onNotificationsChanged,
+            title: Text("Enable notifications"),
+            subtitle: Text("Enable notifications"),
+          ),
+
+          CheckboxListTile(
+            activeColor: Colors.black,
+            value: _notifications,
+            onChanged: _onNotificationsChanged,
+            title: Text("Enable notifications"),
+          ),
+
           ListTile(
             onTap: () async {
               await _showDatePicker();
@@ -104,6 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             title: Text("What is your birthday?"),
           ),
+
           AboutListTile(applicationName: "TikTong"),
         ],
       ),
