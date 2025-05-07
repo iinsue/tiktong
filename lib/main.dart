@@ -49,7 +49,36 @@ class TikTongApp extends StatelessWidget {
           brightness: Brightness.light,
         ).copyWith(primary: Color(0xFFE9435A)),
       ),
-      home: SignUpScreen(),
+      home: LayoutBuilderCodeLab(),
+    );
+  }
+}
+
+class LayoutBuilderCodeLab extends StatelessWidget {
+  const LayoutBuilderCodeLab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: SizedBox(
+        width: size.width / 2,
+        child: LayoutBuilder(
+          builder:
+              (context, BoxConstraints constraints) => Container(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                color: Colors.teal,
+                child: Center(
+                  child: Text(
+                    "${size.width} / ${constraints.maxWidth}",
+                    style: TextStyle(color: Colors.white, fontSize: 98),
+                  ),
+                ),
+              ),
+        ),
+      ),
     );
   }
 }
