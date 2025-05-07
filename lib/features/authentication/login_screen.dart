@@ -4,6 +4,7 @@ import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/login_form_screen.dart';
 import 'package:tiktong/features/authentication/widgets/auth_button.dart';
+import 'package:tiktong/utils.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -58,8 +59,8 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: isDarkMode(context) ? null : Colors.grey.shade50,
         elevation: 1,
-        color: Colors.grey[100],
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: Sizes.size10),
           child: Row(
