@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktong/constants/breakpoints.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 
@@ -37,6 +38,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 화면 너비
+    final width = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
@@ -76,7 +80,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               itemCount: 20,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 // Column 개수
-                crossAxisCount: 2,
+                crossAxisCount: width > Breakpoints.lg ? 5 : 2,
 
                 // Grid 좌우 간격
                 crossAxisSpacing: Sizes.size10,
