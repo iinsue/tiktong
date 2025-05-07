@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -128,7 +130,61 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text("What is your birthday?"),
           ),
 
-          AboutListTile(applicationName: "TikTong"),
+          ListTile(
+            title: Text("Log out (iOS)"),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoDialog(
+                context: context,
+                builder:
+                    (context) => CupertinoAlertDialog(
+                      title: Text("Are you sure?"),
+                      content: Text("Plz dont go"),
+                      actions: [
+                        CupertinoDialogAction(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text("No"),
+                        ),
+                        CupertinoDialogAction(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text("Yes"),
+                        ),
+                      ],
+                    ),
+              );
+            },
+          ),
+
+          ListTile(
+            title: Text("Log out (Android)"),
+            textColor: Colors.red,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder:
+                    (context) => AlertDialog(
+                      title: Text("Are you sure?"),
+                      content: Text("Plz dont go"),
+                      actions: [
+                        IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: FaIcon(FontAwesomeIcons.car),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text("Yes"),
+                        ),
+                      ],
+                    ),
+              );
+            },
+          ),
+
+          AboutListTile(
+            applicationName: "TikTong",
+            applicationVersion: "1.0",
+            applicationLegalese: "Don't copy me.",
+          ),
         ],
       ),
     );
