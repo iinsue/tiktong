@@ -92,67 +92,75 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 childAspectRatio: 9 / 16,
               ),
               itemBuilder:
-                  (context, index) => Column(
-                    children: [
-                      Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Sizes.size4),
-                        ),
-                        child: AspectRatio(
-                          aspectRatio: 9 / 12,
-                          child: FadeInImage.assetNetwork(
-                            fit: BoxFit.cover,
-                            placeholder: "assets/images/placeholder.jpg",
-                            image:
-                                "https://images.unsplash.com/photo-1745503262235-611b59926297?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                          ),
-                        ),
-                      ),
-                      Gaps.v10,
-                      Text(
-                        "This is a very long caption for may tiktok that im upload just now currently.",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: Sizes.size16 + Sizes.size2,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Gaps.v8,
-                      DefaultTextStyle(
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        child: Row(
+                  (context, index) => LayoutBuilder(
+                    builder:
+                        (context, constraints) => Column(
                           children: [
-                            CircleAvatar(
-                              radius: 12,
-                              backgroundImage: NetworkImage(
-                                "https://avatars.githubusercontent.com/u/50567588?v=4",
+                            Container(
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Sizes.size4,
+                                ),
+                              ),
+                              child: AspectRatio(
+                                aspectRatio: 9 / 12,
+                                child: FadeInImage.assetNetwork(
+                                  fit: BoxFit.cover,
+                                  placeholder: "assets/images/placeholder.jpg",
+                                  image:
+                                      "https://images.unsplash.com/photo-1745503262235-611b59926297?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                ),
                               ),
                             ),
-                            Gaps.h4,
-                            Expanded(
-                              child: Text(
-                                "My avatar is going to be very long.",
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                            Gaps.v10,
+                            Text(
+                              "This is a very long caption for may tiktok that im upload just now currently.",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: Sizes.size16 + Sizes.size2,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Gaps.h4,
-                            FaIcon(
-                              FontAwesomeIcons.heart,
-                              size: Sizes.size14,
-                              color: Colors.grey.shade600,
-                            ),
-                            Gaps.h2,
-                            Text("2.5M"),
+                            Gaps.v8,
+
+                            if (constraints.maxWidth < 200 ||
+                                constraints.maxWidth > 250)
+                              DefaultTextStyle(
+                                style: TextStyle(
+                                  color: Colors.grey.shade600,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 12,
+                                      backgroundImage: NetworkImage(
+                                        "https://avatars.githubusercontent.com/u/50567588?v=4",
+                                      ),
+                                    ),
+                                    Gaps.h4,
+                                    Expanded(
+                                      child: Text(
+                                        "My avatar is going to be very long.",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    Gaps.h4,
+                                    FaIcon(
+                                      FontAwesomeIcons.heart,
+                                      size: Sizes.size14,
+                                      color: Colors.grey.shade600,
+                                    ),
+                                    Gaps.h2,
+                                    Text("2.5M"),
+                                  ],
+                                ),
+                              ),
                           ],
                         ),
-                      ),
-                    ],
                   ),
             ),
             for (var tab in tabs.skip(1))
