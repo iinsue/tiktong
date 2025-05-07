@@ -180,6 +180,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
 
+          ListTile(
+            title: Text("Log out (iOS / Bottom)"),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder:
+                    (context) => CupertinoActionSheet(
+                      title: Text("Are you sure?"),
+                      message: Text("Please dont go"),
+                      actions: [
+                        CupertinoActionSheetAction(
+                          isDefaultAction: true,
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(
+                            "Not log out",
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                        CupertinoActionSheetAction(
+                          isDestructiveAction: true,
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text("Yes plz."),
+                        ),
+                      ],
+                    ),
+              );
+            },
+          ),
+
           AboutListTile(
             applicationName: "TikTong",
             applicationVersion: "1.0",
