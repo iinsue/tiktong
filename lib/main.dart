@@ -22,6 +22,7 @@ class TikTongApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: Colors.white,
@@ -49,6 +50,20 @@ class TikTongApp extends StatelessWidget {
           brightness: Brightness.light,
         ).copyWith(primary: Color(0xFFE9435A)),
       ),
+
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: Color(0xFFE9435A),
+        ).copyWith(primary: Color(0xFFE9435A)),
+        bottomAppBarTheme: BottomAppBarTheme(
+          surfaceTintColor: Colors.black,
+          color: Colors.grey.shade900,
+        ),
+      ),
+
       home: SignUpScreen(),
     );
   }
