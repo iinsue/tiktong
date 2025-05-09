@@ -49,11 +49,7 @@ class _InBoxScreenState extends State<InBoxScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            trailing: FaIcon(
-              FontAwesomeIcons.chevronRight,
-              size: Sizes.size14,
-              color: Colors.black,
-            ),
+            trailing: FaIcon(FontAwesomeIcons.chevronRight, size: Sizes.size14),
           ),
           Container(height: Sizes.size1, color: Colors.grey.shade300),
           ListTile(
