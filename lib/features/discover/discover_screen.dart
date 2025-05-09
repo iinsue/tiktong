@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/breakpoints.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/utils.dart';
 
 final tabs = ["Top", "Users", "Videos", "Sounds", "LIVE", "Shopping", "Brands"];
 
@@ -53,6 +54,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               controller: _textEditingController,
               onChanged: _onSearchChanged,
               onSubmitted: _onSearchSubmitted,
+              style: TextStyle(
+                color: isDarkMode(context) ? Colors.white : Colors.black,
+              ),
             ),
           ),
           bottom: TabBar(
@@ -69,9 +73,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               fontSize: Sizes.size16,
               fontWeight: FontWeight.w600,
             ),
-            indicatorColor: Colors.black,
-            unselectedLabelColor: Colors.grey.shade500,
-            labelColor: Colors.black,
             tabs: [for (var tab in tabs) Tab(text: tab)],
           ),
         ),
