@@ -29,6 +29,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
+                backgroundColor: Colors.transparent,
                 centerTitle: true,
                 title: Text("인수"),
                 actions: [
