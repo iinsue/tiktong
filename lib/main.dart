@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/sign_up_screen.dart';
+import 'package:tiktong/utils.dart';
 
 void main() async {
   // 화면 Portrait로 고정
@@ -50,7 +51,12 @@ class TikTongApp extends StatelessWidget {
           primary: Color(0xFFE9435A),
           seedColor: Colors.white,
           brightness: Brightness.light,
-        ).copyWith(primary: Color(0xFFE9435A)),
+        ),
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey.shade500,
+          indicatorColor: Colors.black,
+        ),
       ),
 
       darkTheme: ThemeData(
@@ -65,7 +71,12 @@ class TikTongApp extends StatelessWidget {
         ),
         bottomAppBarTheme: BottomAppBarTheme(
           surfaceTintColor: Colors.black,
-          color: Colors.grey.shade900,
+          color: isDarkMode(context) ? Colors.black : Colors.white,
+        ),
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.grey.shade500,
+          indicatorColor: Colors.white,
         ),
       ),
 
