@@ -106,7 +106,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 vertical: Sizes.size12,
                               ),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor,
+                                color: Theme.of(context).colorScheme.primary,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(Sizes.size4),
                                 ),

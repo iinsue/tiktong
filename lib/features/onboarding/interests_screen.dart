@@ -119,7 +119,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
           child: GestureDetector(
             onTap: _onNextTap,
             child: Container(
-              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+              ),
               alignment: Alignment.center,
               child: const Text(
                 "Next",
