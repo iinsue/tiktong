@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/username_screen.dart';
@@ -39,7 +40,9 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v80,
                   Text(
                     "Sign up for TikTong",
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: GoogleFonts.abrilFatface(
+                      textStyle: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
                   Gaps.v20,
                   Opacity(
