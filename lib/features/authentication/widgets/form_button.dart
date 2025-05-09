@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/utils.dart';
 
 class FormButton extends StatelessWidget {
   const FormButton({super.key, required this.disabled, this.title = "Next"});
@@ -16,7 +17,12 @@ class FormButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: Sizes.size16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Sizes.size5),
-          color: disabled ? Colors.grey[300] : Theme.of(context).primaryColor,
+          color:
+              disabled
+                  ? isDarkMode(context)
+                      ? Colors.grey.shade800
+                      : Colors.grey.shade300
+                  : Theme.of(context).colorScheme.primary,
         ),
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 500),

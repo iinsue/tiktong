@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/sign_up_screen.dart';
 
@@ -26,7 +25,7 @@ class TikTongApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
-        textTheme: GoogleFonts.itimTextTheme(),
+        textTheme: Typography.blackMountainView,
         scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color(0xFFE9435A),
@@ -48,21 +47,22 @@ class TikTongApp extends StatelessWidget {
           color: Colors.white,
         ),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xFFE9435A),
+          primary: Color(0xFFE9435A),
+          seedColor: Colors.white,
           brightness: Brightness.light,
         ).copyWith(primary: Color(0xFFE9435A)),
       ),
 
       darkTheme: ThemeData(
         useMaterial3: true,
-        textTheme: GoogleFonts.itimTextTheme(
-          ThemeData(brightness: Brightness.dark).textTheme,
-        ),
+        textTheme: Typography.whiteMountainView,
         scaffoldBackgroundColor: Colors.black,
+        appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade900),
         colorScheme: ColorScheme.fromSeed(
+          primary: Color(0xFFE9435A),
           brightness: Brightness.dark,
-          seedColor: Color(0xFFE9435A),
-        ).copyWith(primary: Color(0xFFE9435A)),
+          seedColor: Colors.black,
+        ),
         bottomAppBarTheme: BottomAppBarTheme(
           surfaceTintColor: Colors.black,
           color: Colors.grey.shade900,
