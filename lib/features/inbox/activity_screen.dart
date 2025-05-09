@@ -136,24 +136,17 @@ class _ActivityScreenState extends State<ActivityScreen>
                       width: Sizes.size52,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
                         border: Border.all(
                           color: Colors.grey.shade400,
                           width: Sizes.size1,
                         ),
                       ),
-                      child: const Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.bell,
-                          color: Colors.black,
-                        ),
-                      ),
+                      child: const Center(child: FaIcon(FontAwesomeIcons.bell)),
                     ),
                     title: RichText(
                       text: TextSpan(
                         text: "Account updates:",
                         style: TextStyle(
-                          color: Colors.black,
                           fontSize: Sizes.size16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -190,7 +183,7 @@ class _ActivityScreenState extends State<ActivityScreen>
             position: _panelAnimation,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).appBarTheme.backgroundColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(Sizes.size4),
                   bottomRight: Radius.circular(Sizes.size4),
@@ -203,11 +196,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                     ListTile(
                       title: Row(
                         children: [
-                          FaIcon(
-                            tab["icon"],
-                            color: Colors.black,
-                            size: Sizes.size16,
-                          ),
+                          Icon(tab["icon"], size: Sizes.size16),
                           Gaps.h20,
                           Text(
                             tab["title"],
