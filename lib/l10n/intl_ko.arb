@@ -1,6 +1,6 @@
 {
   "@@locale": "ko",
-  "signUpTitle": "{nameOfTheApp}에 가입하세요",
+  "signUpTitle": "{nameOfTheApp}에 가입하세요 {when}",
   "@signUpTitle": {
     "description": "회원가입화면 제목 문구 입니다.",
     "placeholders": {
