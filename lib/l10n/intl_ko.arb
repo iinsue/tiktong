@@ -20,7 +20,8 @@
       }
     }
   },
-  "signUpSubtitle": "프로필 만들고 다른 계정 팔로우해서 나만의 동영상 공유하세요!",
+  "signUpSubtitle": "프로필 만들고 다른 계정 팔로우해서 나만의 {videoCount, plural, =0{동영상} =1{동영상} other{동영상들}}을 공유하세요!",
   "emailPasswordButton": "이메일로 회원가입",
-  "appleButton": "애플 계정으로 회원가입"
+  "appleButton": "애플 계정으로 회원가입",
+  "logIn": "Log in {gender, select, male{sir} female{madam} other{human}}"
 }
