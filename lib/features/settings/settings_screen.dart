@@ -19,6 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         initialDate: DateTime.now(),
         firstDate: DateTime(1980),
         lastDate: DateTime(2030),
+        locale: const Locale('ko', 'KR'),
       );
       if (date != null && mounted) {
         ScaffoldMessenger.of(
@@ -60,6 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         context: context,
         firstDate: DateTime(1980),
         lastDate: DateTime(2030),
+        locale: const Locale('ko', 'KR'),
         builder: (context, child) {
           return Theme(
             data: Theme.of(context).copyWith(
@@ -105,7 +107,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Localizations.override(
       context: context,
-      locale: Locale("ko"),
+      locale: const Locale('ko', 'KR'),
       child: Scaffold(
         appBar: AppBar(centerTitle: true, title: Text("Settings")),
         body: ListView(

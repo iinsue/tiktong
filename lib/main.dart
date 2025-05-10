@@ -24,12 +24,13 @@ class TikTongApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTong',
+      locale: WidgetsBinding.instance.platformDispatcher.locale,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', "US"),
         Locale('ko', "KR"),
         Locale("es", "ES"),
