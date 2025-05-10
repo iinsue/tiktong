@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m5(videoCount) =>
       "프로필 만들고 다른 계정 팔로우해서 나만의 ${Intl.plural(videoCount, zero: '동영상', one: '동영상', other: '동영상들')}을 공유하세요!";
 
-  static String m6(nameOfTheApp) => "${nameOfTheApp}에 가입하세요";
+  static String m6(nameOfTheApp, when) => "${nameOfTheApp}에 가입하세요 ${when}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
