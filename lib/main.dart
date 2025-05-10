@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/sign_up_screen.dart';
 import 'package:tiktong/utils.dart';
+import 'package:flutter_gen/gen_l10n/intl_generated.dart';
 
 void main() async {
   // 화면 Portrait로 고정
@@ -26,6 +27,7 @@ class TikTongApp extends StatelessWidget {
       title: 'TikTong',
       locale: WidgetsBinding.instance.platformDispatcher.locale,
       localizationsDelegates: [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
