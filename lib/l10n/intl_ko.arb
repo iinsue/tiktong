@@ -1,0 +1,26 @@
+{
+  "@@locale": "ko",
+  "signUpTitle": "{nameOfTheApp}에 가입하세요",
+  "@signUpTitle": {
+    "description": "회원가입화면 제목 문구 입니다.",
+    "placeholders": {
+      "nameOfTheApp": {
+        "type": "String",
+        "example": "TikTong"
+      }
+    }
+  },
+  "loginTitle": "{nameOfTheApp}에 로그인하세요",
+  "@loginTitle": {
+    "description": "로그인화면 제목 문구 입니다.",
+    "placeholders": {
+      "nameOfTheApp": {
+        "type": "String",
+        "example": "TikTong"
+      }
+    }
+  },
+  "signUpSubtitle": "프로필 만들고 다른 계정 팔로우해서 나만의 동영상 공유하세요!",
+  "emailPasswordButton": "이메일로 회원가입",
+  "appleButton": "애플 계정으로 회원가입"
+}
