@@ -25,7 +25,7 @@ class TikTongApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTong',
-      locale: Locale("en"),
+      locale: Locale("ko"),
       // 시스템 locale 설정 - WidgetsBinding.instance.platformDispatcher.locale
       localizationsDelegates: [
         S.delegate,
