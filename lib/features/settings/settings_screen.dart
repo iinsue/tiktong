@@ -103,119 +103,123 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("Settings")),
-      body: ListView(
-        children: [
-          SwitchListTile.adaptive(
-            value: _notifications,
-            onChanged: _onNotificationsChanged,
-            title: Text("Enable notifications"),
-            subtitle: Text("Enable notifications"),
-          ),
+    return Localizations.override(
+      context: context,
+      locale: Locale("ko"),
+      child: Scaffold(
+        appBar: AppBar(centerTitle: true, title: Text("Settings")),
+        body: ListView(
+          children: [
+            SwitchListTile.adaptive(
+              value: _notifications,
+              onChanged: _onNotificationsChanged,
+              title: Text("Enable notifications"),
+              subtitle: Text("Enable notifications"),
+            ),
 
-          CheckboxListTile(
-            activeColor: Colors.black,
-            value: _notifications,
-            onChanged: _onNotificationsChanged,
-            title: Text("Enable notifications"),
-          ),
+            CheckboxListTile(
+              activeColor: Colors.black,
+              value: _notifications,
+              onChanged: _onNotificationsChanged,
+              title: Text("Enable notifications"),
+            ),
 
-          ListTile(
-            onTap: () async {
-              await _showDatePicker();
-              await _showTimePicker();
-              await _showDateRangePicker();
-            },
-            title: Text("What is your birthday?"),
-          ),
+            ListTile(
+              onTap: () async {
+                await _showDatePicker();
+                await _showTimePicker();
+                await _showDateRangePicker();
+              },
+              title: Text("What is your birthday?"),
+            ),
 
-          ListTile(
-            title: Text("Log out (iOS)"),
-            textColor: Colors.red,
-            onTap: () {
-              showCupertinoDialog(
-                context: context,
-                builder:
-                    (context) => CupertinoAlertDialog(
-                      title: Text("Are you sure?"),
-                      content: Text("Plz dont go"),
-                      actions: [
-                        CupertinoDialogAction(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text("No"),
-                        ),
-                        CupertinoDialogAction(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text("Yes"),
-                        ),
-                      ],
-                    ),
-              );
-            },
-          ),
-
-          ListTile(
-            title: Text("Log out (Android)"),
-            textColor: Colors.red,
-            onTap: () {
-              showDialog(
-                context: context,
-                builder:
-                    (context) => AlertDialog(
-                      title: Text("Are you sure?"),
-                      content: Text("Plz dont go"),
-                      actions: [
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: FaIcon(FontAwesomeIcons.car),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text("Yes"),
-                        ),
-                      ],
-                    ),
-              );
-            },
-          ),
-
-          ListTile(
-            title: Text("Log out (iOS / Bottom)"),
-            textColor: Colors.red,
-            onTap: () {
-              showCupertinoModalPopup(
-                context: context,
-                builder:
-                    (context) => CupertinoActionSheet(
-                      title: Text("Are you sure?"),
-                      message: Text("Please dont go"),
-                      actions: [
-                        CupertinoActionSheetAction(
-                          isDefaultAction: true,
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text(
-                            "Not log out",
-                            style: TextStyle(color: Colors.blue),
+            ListTile(
+              title: Text("Log out (iOS)"),
+              textColor: Colors.red,
+              onTap: () {
+                showCupertinoDialog(
+                  context: context,
+                  builder:
+                      (context) => CupertinoAlertDialog(
+                        title: Text("Are you sure?"),
+                        content: Text("Plz dont go"),
+                        actions: [
+                          CupertinoDialogAction(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text("No"),
                           ),
-                        ),
-                        CupertinoActionSheetAction(
-                          isDestructiveAction: true,
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text("Yes plz."),
-                        ),
-                      ],
-                    ),
-              );
-            },
-          ),
+                          CupertinoDialogAction(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text("Yes"),
+                          ),
+                        ],
+                      ),
+                );
+              },
+            ),
 
-          AboutListTile(
-            applicationName: "TikTong",
-            applicationVersion: "1.0",
-            applicationLegalese: "Don't copy me.",
-          ),
-        ],
+            ListTile(
+              title: Text("Log out (Android)"),
+              textColor: Colors.red,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        title: Text("Are you sure?"),
+                        content: Text("Plz dont go"),
+                        actions: [
+                          IconButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            icon: FaIcon(FontAwesomeIcons.car),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text("Yes"),
+                          ),
+                        ],
+                      ),
+                );
+              },
+            ),
+
+            ListTile(
+              title: Text("Log out (iOS / Bottom)"),
+              textColor: Colors.red,
+              onTap: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder:
+                      (context) => CupertinoActionSheet(
+                        title: Text("Are you sure?"),
+                        message: Text("Please dont go"),
+                        actions: [
+                          CupertinoActionSheetAction(
+                            isDefaultAction: true,
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text(
+                              "Not log out",
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                          CupertinoActionSheetAction(
+                            isDestructiveAction: true,
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text("Yes plz."),
+                          ),
+                        ],
+                      ),
+                );
+              },
+            ),
+
+            AboutListTile(
+              applicationName: "TikTong",
+              applicationVersion: "1.0",
+              applicationLegalese: "Don't copy me.",
+            ),
+          ],
+        ),
       ),
     );
   }
