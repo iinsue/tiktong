@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/authentication/sign_up_screen.dart';
 import 'package:tiktong/utils.dart';
@@ -25,18 +24,10 @@ class TikTongApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TikTong',
-      locale: WidgetsBinding.instance.platformDispatcher.locale,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', "US"),
-        Locale('ko', "KR"),
-        Locale("es", "ES"),
-      ],
+      // 시스템 locale 설정 - WidgetsBinding.instance.platformDispatcher.locale
+      locale: const Locale('ko', 'KR'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
