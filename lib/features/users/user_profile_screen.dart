@@ -7,7 +7,9 @@ import 'package:tiktong/features/users/widgets/persistent_tabbar.dart';
 import 'package:tiktong/features/users/widgets/user_summary_column.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  final String username;
+
+  const UserProfileScreen({super.key, required this.username});
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -31,7 +33,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               SliverAppBar(
                 backgroundColor: Colors.transparent,
                 centerTitle: true,
-                title: Text("인수"),
+                title: Text(widget.username),
                 actions: [
                   IconButton(
                     onPressed: _onGearPressed,
@@ -55,7 +57,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "@인수",
+                          "@${widget.username}",
                           style: TextStyle(
                             fontSize: Sizes.size18,
                             fontWeight: FontWeight.w600,
