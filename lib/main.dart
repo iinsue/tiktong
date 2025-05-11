@@ -7,6 +7,7 @@ import 'package:tiktong/features/authentication/login_screen.dart';
 import 'package:tiktong/features/authentication/sign_up_screen.dart';
 import 'package:tiktong/features/authentication/username_screen.dart';
 import 'package:tiktong/generated/l10n.dart';
+import 'package:tiktong/router.dart';
 import 'package:tiktong/utils.dart';
 
 void main() async {
@@ -25,7 +26,8 @@ class TikTongApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'TikTong',
       locale: Locale("ko"),
@@ -94,14 +96,6 @@ class TikTongApp extends StatelessWidget {
           indicatorColor: Colors.white,
         ),
       ),
-      // 라우트 설정
-      initialRoute: SignUpScreen.routeName,
-      routes: {
-        SignUpScreen.routeName: (context) => const SignUpScreen(),
-        UsernameScreen.routeName: (context) => const UsernameScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen(),
-        EmailScreen.routeName: (context) => EmailScreen(),
-      },
     );
   }
 }
