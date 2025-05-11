@@ -52,7 +52,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Offstage(offstage: _selectedIndex != 3, child: InBoxScreen()),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: UserProfileScreen(username: "인수"),
+            child: UserProfileScreen(username: "인수", tab: "likes"),
           ),
         ],
       ),
