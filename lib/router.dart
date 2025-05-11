@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktong/features/authentication/email_screen.dart';
 import 'package:tiktong/features/authentication/login_screen.dart';
@@ -8,8 +9,26 @@ import 'package:tiktong/features/users/user_profile_screen.dart';
 final router = GoRouter(
   routes: [
     GoRoute(
-      path: SignUpScreen.routeName,
+      name: SignUpScreen.routeName,
+      path: SignUpScreen.routeURL,
       builder: (context, state) => const SignUpScreen(),
+      routes: [
+        GoRoute(
+          name: UsernameScreen.routeName,
+          path: UsernameScreen.routeURL,
+          builder: (context, state) => const UsernameScreen(),
+          routes: [
+            GoRoute(
+              name: EmailScreen.routeName,
+              path: EmailScreen.routeURL,
+              builder: (context, state) {
+                final args = state.extra as EmailScreenArgs;
+                return EmailScreen(username: args.username);
+              },
+            ),
+          ],
+        ),
+      ],
     ),
 
     GoRoute(
@@ -17,19 +36,21 @@ final router = GoRouter(
       builder: (context, state) => const LoginScreen(),
     ),
 
-    GoRoute(
+    /*  GoRoute(
+      name: "username_screen",
       path: UsernameScreen.routeName,
-      builder: (context, state) => const UsernameScreen(),
-    ),
-
-    GoRoute(
-      path: EmailScreen.routeName,
-      builder: (context, state) {
-        final args = state.extra as EmailScreenArgs;
-        return EmailScreen(username: args.username);
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: UsernameScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(scale: animation, child: child),
+            );
+          },
+        );
       },
-    ),
-
+    ), */
     GoRoute(
       path: "/users/:username",
       builder: (context, state) {

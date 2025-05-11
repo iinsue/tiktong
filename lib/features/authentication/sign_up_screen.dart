@@ -10,7 +10,8 @@ import 'package:tiktong/generated/l10n.dart';
 import 'package:tiktong/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static String routeName = "/";
+  static String routeURL = "/";
+  static const routeName = "signUp";
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) async {
@@ -18,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void _onEmailTap(BuildContext context) {
-    context.push(UsernameScreen.routeName);
+    context.pushNamed(UsernameScreen.routeName);
 
     /*     Navigator.of(context).push(
       PageRouteBuilder(
