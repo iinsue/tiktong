@@ -50,7 +50,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Offstage(offstage: _selectedIndex != 0, child: VideoTimelineScreen()),
           Offstage(offstage: _selectedIndex != 1, child: DiscoverScreen()),
           Offstage(offstage: _selectedIndex != 3, child: InBoxScreen()),
-          Offstage(offstage: _selectedIndex != 4, child: UserProfileScreen()),
+          Offstage(
+            offstage: _selectedIndex != 4,
+            child: UserProfileScreen(username: "인수"),
+          ),
         ],
       ),
 
