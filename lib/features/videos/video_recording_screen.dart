@@ -59,6 +59,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   Future<void> initPermissions() async {
     final cameraPermission = await Permission.camera.request();
     final micPermission = await Permission.microphone.request();
+    // 스토리지 권한 요청
+    await Permission.storage.request();
 
     final cameraDenied =
         cameraPermission.isDenied || cameraPermission.isPermanentlyDenied;
