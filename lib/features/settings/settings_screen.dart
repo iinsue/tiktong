@@ -113,10 +113,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
         appBar: AppBar(centerTitle: true, title: Text("Settings")),
         body: ListView(
           children: [
+            AnimatedBuilder(
+              animation: videoConfig,
+              builder:
+                  (context, child) => SwitchListTile.adaptive(
+                    value: videoConfig.autoMute,
+                    onChanged: (value) {
+                      videoConfig.toggleAuthMute();
+                    },
+                    title: Text("Auto Mute videos"),
+                    subtitle: Text("Enable notifications"),
+                  ),
+            ),
+
             SwitchListTile.adaptive(
-              value: VideoConfigData.of(context).autoMute,
+              value: _notifications,
               onChanged: (value) {
-                VideoConfigData.of(context).toggleMuted();
+                _onNotificationsChanged;
               },
               title: Text("Auto Mute videos"),
               subtitle: Text("Enable notifications"),
