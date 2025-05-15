@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktong/features/videos/views/widgets/video_button.dart';
 import 'package:tiktong/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktong/generated/l10n.dart';
@@ -75,6 +77,10 @@ class _VideoPostState extends State<VideoPost>
       value: 1.5, // 시작점
       duration: _animationDuration,
     );
+
+    context.read<PlaybackConfigViewModel>().addListener(
+      _onPlaybackConfigChanged,
+    );
   }
 
   @override
@@ -83,13 +89,27 @@ class _VideoPostState extends State<VideoPost>
     super.dispose();
   }
 
+  void _onPlaybackConfigChanged() {
+    if (!mounted) return;
+
+    final isMuted = context.read<PlaybackConfigViewModel>().muted;
+    if (isMuted) {
+      _videoPlayerController.setVolume(0);
+    } else {
+      _videoPlayerController.setVolume(1);
+    }
+  }
+
   void _onVisibilityChanged(VisibilityInfo info) {
     if (!mounted) return;
 
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
-      _videoPlayerController.play();
+      final isAutoplay = context.read<PlaybackConfigViewModel>().autoplay;
+      if (isAutoplay) {
+        _videoPlayerController.play();
+      }
     }
 
     // 다른 탭으로 이동 시 영상정지
@@ -186,12 +206,17 @@ class _VideoPostState extends State<VideoPost>
             top: Sizes.size40,
             child: IconButton(
               icon: FaIcon(
-                false
+                context.watch<PlaybackConfigViewModel>().muted
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () {
+                bool isMuted = context.read<PlaybackConfigViewModel>().muted;
+                return context.read<PlaybackConfigViewModel>().setMuted(
+                  !isMuted,
+                );
+              },
             ),
           ),
 
