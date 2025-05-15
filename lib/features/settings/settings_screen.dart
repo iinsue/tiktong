@@ -117,9 +117,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               animation: videoConfig,
               builder:
                   (context, child) => SwitchListTile.adaptive(
-                    value: videoConfig.autoMute,
+                    value: videoConfig.value,
                     onChanged: (value) {
-                      videoConfig.toggleAuthMute();
+                      videoConfig.value = !videoConfig.value;
                     },
                     title: Text("Auto Mute videos"),
                     subtitle: Text("Enable notifications"),
