@@ -8,8 +8,8 @@ import 'package:tiktong/features/inbox/inbox_screen.dart';
 import 'package:tiktong/common/widgets/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktong/common/widgets/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktong/features/users/user_profile_screen.dart';
-import 'package:tiktong/features/videos/video_recording_screen.dart';
-import 'package:tiktong/features/videos/video_timeline_screen.dart';
+import 'package:tiktong/features/videos/views/video_recording_screen.dart';
+import 'package:tiktong/features/videos/views/video_timeline_screen.dart';
 import 'package:tiktong/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {

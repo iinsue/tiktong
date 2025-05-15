@@ -7,7 +7,7 @@ import 'package:tiktong/features/inbox/activity_screen.dart';
 import 'package:tiktong/features/inbox/chat_detail_screen.dart';
 import 'package:tiktong/features/inbox/chats_screen.dart';
 import 'package:tiktong/features/onboarding/interests_screen.dart';
-import 'package:tiktong/features/videos/video_recording_screen.dart';
+import 'package:tiktong/features/videos/views/video_recording_screen.dart';
 
 final router = GoRouter(
   initialLocation: "/home",
