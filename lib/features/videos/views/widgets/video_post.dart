@@ -77,10 +77,6 @@ class _VideoPostState extends State<VideoPost>
       value: 1.5, // 시작점
       duration: _animationDuration,
     );
-
-    context.read<PlaybackConfigViewModel>().addListener(
-      _onPlaybackConfigChanged,
-    );
   }
 
   @override
@@ -92,8 +88,7 @@ class _VideoPostState extends State<VideoPost>
   void _onPlaybackConfigChanged() {
     if (!mounted) return;
 
-    final isMuted = context.read<PlaybackConfigViewModel>().muted;
-    if (isMuted) {
+    if (false) {
       _videoPlayerController.setVolume(0);
     } else {
       _videoPlayerController.setVolume(1);
@@ -106,8 +101,7 @@ class _VideoPostState extends State<VideoPost>
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
-      final isAutoplay = context.read<PlaybackConfigViewModel>().autoplay;
-      if (isAutoplay) {
+      if (false) {
         _videoPlayerController.play();
       }
     }
@@ -206,17 +200,12 @@ class _VideoPostState extends State<VideoPost>
             top: Sizes.size40,
             child: IconButton(
               icon: FaIcon(
-                context.watch<PlaybackConfigViewModel>().muted
+                false
                     ? FontAwesomeIcons.volumeOff
                     : FontAwesomeIcons.volumeHigh,
                 color: Colors.white,
               ),
-              onPressed: () {
-                bool isMuted = context.read<PlaybackConfigViewModel>().muted;
-                return context.read<PlaybackConfigViewModel>().setMuted(
-                  !isMuted,
-                );
-              },
+              onPressed: () {},
             ),
           ),
 
