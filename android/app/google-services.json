@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "381554635819",
+    "project_id": "tik-tong-insu",
+    "storage_bucket": "tik-tong-insu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381554635819:android:be91ffb3327a09ee31666e",
+        "android_client_info": {
+          "package_name": "com.example.tiktong"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC99o8RXIEXOc8C4XV9r_ETAXa8bo6Bn6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,13 +7,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/videos/repositories/video_playback_config_repo.dart';
 import 'package:tiktong/features/videos/view_models/playback_config_vm.dart';
+import 'package:tiktong/firebase_options.dart';
 import 'package:tiktong/generated/l10n.dart';
 import 'package:tiktong/router.dart';
 import 'package:tiktong/utils.dart';
 
 void main() async {
-  // 화면 Portrait로 고정
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase Initialization
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // 화면 Portrait로 고정
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // 시스템 UI(배터리,시간,...) 색상전환
