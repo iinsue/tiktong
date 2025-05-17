@@ -1,21 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:tiktong/features/videos/view_models/playback_config_vm.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool _notifications = false;
-
-  Future<void> _showDatePicker() async {
-    try {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Future<void> datePicker() async {
       final date = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -23,42 +18,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
         lastDate: DateTime(2030),
         locale: const Locale('ko', 'KR'),
       );
-      if (date != null && mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('선택된 날짜: ${date.toString()}')));
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('날짜 선택 중 오류가 발생했습니다: $e')));
+
+      if (kDebugMode) {
+        print(date);
       }
     }
-  }
 
-  Future<void> _showTimePicker() async {
-    try {
+    Future<void> timePicker() async {
       final time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
       );
-      if (time != null && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('선택된 시간: ${time.format(context)}')),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('시간 선택 중 오류가 발생했습니다: $e')));
+
+      if (kDebugMode) {
+        print(time);
       }
     }
-  }
 
-  Future<void> _showDateRangePicker() async {
-    try {
+    Future<void> dateRangePicker() async {
       final booking = await showDateRangePicker(
         context: context,
         firstDate: DateTime(1980),
@@ -80,33 +57,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           );
         },
       );
-      if (booking != null && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '선택된 기간: ${booking.start.toString()} ~ ${booking.end.toString()}',
-            ),
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('기간 선택 중 오류가 발생했습니다: $e')));
+      if (kDebugMode) {
+        print(booking);
       }
     }
-  }
 
-  void _onNotificationsChanged(bool? newValue) {
-    if (newValue == null) return;
-    setState(() {
-      _notifications = newValue;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Localizations.override(
       context: context,
       locale: const Locale('ko', 'KR'),
@@ -115,40 +70,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
         body: ListView(
           children: [
             SwitchListTile.adaptive(
-              value: false,
-              onChanged: (value) {},
+              value: ref.watch(playbackConfigProvider).muted,
+              onChanged:
+                  (value) => {
+                    ref.read(playbackConfigProvider.notifier).setMuted(value),
+                  },
               title: Text("Muted video"),
               subtitle: Text("Video will be muted by default."),
             ),
 
             SwitchListTile.adaptive(
-              value: false,
-              onChanged: (value) {},
+              value: ref.watch(playbackConfigProvider).autoplay,
+              onChanged:
+                  (value) => {
+                    ref.read(playbackConfigProvider.notifier).setAutplay(value),
+                  },
               title: Text("Autoplay"),
               subtitle: Text("Video will start playing automatically."),
             ),
 
             SwitchListTile.adaptive(
-              value: _notifications,
-              onChanged: (value) {
-                _onNotificationsChanged;
-              },
+              value: false,
+              onChanged: (value) {},
               title: Text("Auto Mute videos"),
               subtitle: Text("Enable notifications"),
             ),
 
             CheckboxListTile(
               activeColor: Colors.black,
-              value: _notifications,
-              onChanged: _onNotificationsChanged,
+              value: false,
+              onChanged: (value) {},
               title: Text("Videos will be muted by default."),
             ),
 
             ListTile(
               onTap: () async {
-                await _showDatePicker();
-                await _showTimePicker();
-                await _showDateRangePicker();
+                await datePicker();
+                await timePicker();
+                await dateRangePicker();
               },
               title: Text("What is your birthday?"),
             ),
