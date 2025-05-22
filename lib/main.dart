@@ -39,13 +39,13 @@ void main() async {
   );
 }
 
-class TikTongApp extends StatelessWidget {
+class TikTongApp extends ConsumerWidget {
   const TikTongApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: ref.watch(routerProvider),
       debugShowCheckedModeBanner: false,
       title: 'TikTong',
       locale: Locale("ko"),
