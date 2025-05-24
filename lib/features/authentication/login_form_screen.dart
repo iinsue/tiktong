@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/authentication/view_models/login_view_model.dart';
 import 'package:tiktong/features/authentication/widgets/form_button.dart';
-import 'package:tiktong/features/onboarding/interests_screen.dart';
 
-class LoginFormScreen extends StatefulWidget {
+class LoginFormScreen extends ConsumerStatefulWidget {
   const LoginFormScreen({super.key});
 
   @override
-  State<LoginFormScreen> createState() => _LoginFormScreenState();
+  ConsumerState<LoginFormScreen> createState() => _LoginFormScreenState();
 }
 
-class _LoginFormScreenState extends State<LoginFormScreen> {
+class _LoginFormScreenState extends ConsumerState<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Map<String, String> formData = {};
@@ -22,8 +22,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
 
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
-      context.goNamed(InterestsScreen.routeName);
+      ref
+          .read(loginProvier.notifier)
+          .login(formData["email"]!, formData["password"]!, context);
+      //context.goNamed(InterestsScreen.routeName);
     }
   }
 
@@ -71,7 +73,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 Gaps.v28,
                 GestureDetector(
                   onTap: _onSubmitTap,
-                  child: FormButton(disabled: false, title: "Log in"),
+                  child: FormButton(
+                    disabled: ref.watch(loginProvier).isLoading,
+                    title: "Log in",
+                  ),
                 ),
               ],
             ),
