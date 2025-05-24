@@ -12,6 +12,9 @@ import 'package:tiktong/features/onboarding/interests_screen.dart';
 import 'package:tiktong/features/videos/views/video_recording_screen.dart';
 
 final routerProvider = Provider((ref) {
+  // 이렇게 router에 직접 넣으면 자동으로 rebuild 되면서 로그인 상태를 알려줍니다.
+  ref.watch(authState);
+
   return GoRouter(
     initialLocation: "/home",
     redirect: (context, state) {
