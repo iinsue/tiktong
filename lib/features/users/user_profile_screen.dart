@@ -5,6 +5,7 @@ import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
 import 'package:tiktong/features/settings/settings_screen.dart';
 import 'package:tiktong/features/users/view_models/users_view_model.dart';
+import 'package:tiktong/features/users/widgets/avatar.dart';
 import 'package:tiktong/features/users/widgets/persistent_tabbar.dart';
 import 'package:tiktong/features/users/widgets/user_summary_column.dart';
 
@@ -62,17 +63,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                         SliverToBoxAdapter(
                           child: Column(
                             children: [
-                              CircleAvatar(
-                                radius: 50,
-                                foregroundColor: Colors.deepPurple,
-                                foregroundImage: NetworkImage(
-                                  "https://avatars.githubusercontent.com/u/50567588?v=4",
-                                ),
-                                child: Text(
-                                  data.name,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
+                              Avatar(name: data.name),
                               Gaps.v20,
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
