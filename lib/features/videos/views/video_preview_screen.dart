@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:tiktong/features/videos/view_models/timeline_view_model.dart';
+import 'package:tiktong/features/videos/view_models/upload_video_view_model.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPreviewScreen extends ConsumerStatefulWidget {
@@ -86,12 +87,14 @@ class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
   }
 
   void _onUploadPressed() {
-    ref.read(timelineProvider.notifier).uploadVideo();
+    ref
+        .read(uploadVideoProvider.notifier)
+        .uploadVideo(File(widget.video.path), context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(timelineProvider).isLoading;
+    final isLoading = ref.watch(uploadVideoProvider).isLoading;
 
     return Scaffold(
       backgroundColor: Colors.black,
