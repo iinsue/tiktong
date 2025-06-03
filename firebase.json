@@ -1,1 +1,39 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"tik-tong-insu","appId":"1:381554635819:android:be91ffb3327a09ee31666e","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"tik-tong-insu","configurations":{"android":"1:381554635819:android:be91ffb3327a09ee31666e","ios":"1:381554635819:ios:12328372359b982c31666e","web":"1:381554635819:web:99d98e0c2a8a0d7e31666e"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "tik-tong-insu",
+          "appId": "1:381554635819:android:be91ffb3327a09ee31666e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "tik-tong-insu",
+          "configurations": {
+            "android": "1:381554635819:android:be91ffb3327a09ee31666e",
+            "ios": "1:381554635819:ios:12328372359b982c31666e",
+            "web": "1:381554635819:web:99d98e0c2a8a0d7e31666e"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ]
+}
