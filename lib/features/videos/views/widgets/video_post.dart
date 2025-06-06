@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/videos/models/video_model.dart';
 import 'package:tiktong/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktong/features/videos/views/widgets/video_button.dart';
 import 'package:tiktong/features/videos/views/widgets/video_comments.dart';
@@ -13,11 +14,13 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
+  final VideoModel videoData;
   final int index;
 
   const VideoPost({
     super.key,
     required this.index,
+    required this.videoData,
     required this.onVideoFinished,
   });
 
@@ -168,7 +171,10 @@ class VideoPostState extends ConsumerState<VideoPost>
             child:
                 _videoPlayerController.value.isInitialized
                     ? VideoPlayer(_videoPlayerController)
-                    : Container(color: Colors.black),
+                    : Image.network(
+                      widget.videoData.thumbnailUrl,
+                      fit: BoxFit.cover,
+                    ),
           ),
 
           Positioned.fill(child: GestureDetector(onTap: _onTogglePause)),
@@ -217,9 +223,9 @@ class VideoPostState extends ConsumerState<VideoPost>
             left: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  "@인수",
+                  "@${widget.videoData.creator}",
                   style: TextStyle(
                     fontSize: Sizes.size20,
                     color: Colors.white,
@@ -228,7 +234,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v10,
                 Text(
-                  "This is my monitor in Korea!!",
+                  widget.videoData.description,
                   style: TextStyle(fontSize: Sizes.size16, color: Colors.white),
                 ),
               ],
@@ -246,12 +252,12 @@ class VideoPostState extends ConsumerState<VideoPost>
                   foregroundColor: Colors.white,
                   // 이미지 URL
                   foregroundImage: NetworkImage(
-                    "https://avatars.githubusercontent.com/u/50567588?v=4",
+                    "https://firebasestorage.googleapis.com/v0/b/tik-tong-insu.firebasestorage.app/o/avatars%2F${widget.videoData.creatorUid}?alt=media",
                   ),
 
                   // 이미지 없을 때 보여지는 것
                   child: Text(
-                    "인수",
+                    widget.videoData.creator,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -266,14 +272,14 @@ class VideoPostState extends ConsumerState<VideoPost>
                 Gaps.v24,
                 VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: S.of(context).likeCount(29000000),
+                  text: S.of(context).likeCount(widget.videoData.likes),
                 ),
                 Gaps.v24,
                 GestureDetector(
                   onTap: () => _onCommentsTap(context),
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidComment,
-                    text: S.of(context).commentCount(33000),
+                    text: S.of(context).commentCount(widget.videoData.comments),
                   ),
                 ),
                 Gaps.v24,
