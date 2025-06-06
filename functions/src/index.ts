@@ -17,10 +17,26 @@ export const onVideoCreated = functions.firestore.onDocumentCreated(
     region: "asia-northeast3",
   },
   async (event) => {
-    // snapshot은 방금 만들어진 영상을 의미
     const snapshot = event.data;
     if (!snapshot) return;
 
-    await snapshot.ref.update({ hello: "from functions" });
+    const spawn = require("child-process-promise").spawn;
+    const video = snapshot.data();
+    await spawn("ffmpeg", [
+      "-i",
+      video.fileUrl,
+      "-ss",
+      "00:00:01.000",
+      "-vframes",
+      "1",
+      "-vf",
+      "scale=150:-1",
+      `/tmp/${snapshot.id}.jpg`,
+    ]);
+
+    const storage = admin.storage();
+    await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`, {
+      destination: `thumbnails/${snapshot.id}.jpg`,
+    });
   }
 );
