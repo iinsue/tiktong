@@ -2,31 +2,19 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktong/features/videos/models/video_model.dart';
+import 'package:tiktong/features/videos/repositories/videos_repo.dart';
 
 class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
-  //List<VideoModel> _list = [VideoModel(title: "First video")];
+  late final VideosRepository _repository;
   List<VideoModel> _list = [];
-
-  void uploadVideo() async {
-    // timeline view model을 다시 loading state로 변경
-    state = AsyncValue.loading();
-
-    // 2초 딜레이
-    await Future.delayed(const Duration(seconds: 2));
-
-    //final newVideo = VideoModel(title: "${DateTime.now()}");
-    //_list = [..._list, newVideo];
-    _list = [..._list];
-    state = AsyncValue.data(_list);
-  }
 
   @override
   FutureOr<List<VideoModel>> build() async {
-    // 5초 딜레이
-    await Future.delayed(Duration(seconds: 5));
+    _repository = ref.read(videosRepo);
+    final result = await _repository.fetchVideos();
+    final newList = result.docs.map((doc) => VideoModel.fromJson(doc.data()));
 
-    // 에러출력 테스트
-    // throw Exception("OMG cant fetch");
+    _list = newList.toList(); // 이터러블을 리스트로 전환
 
     return _list;
   }
