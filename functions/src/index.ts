@@ -41,7 +41,7 @@ export const onVideoCreated = functions.firestore.onDocumentCreated(
     await file.makePublic();
 
     // 만든 파일 업데이트
-    await snapshot.ref.update({ thumbnailUrl: file.publicUrl });
+    await snapshot.ref.update({ thumbnailUrl: file.publicUrl() });
 
     const db = admin.firestore();
     await db
