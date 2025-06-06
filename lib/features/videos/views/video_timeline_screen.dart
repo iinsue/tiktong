@@ -37,8 +37,14 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     //_pageController.nextPage(duration: _scrollDuration, curve: _scrollCurve);
   }
 
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   Future<void> _onRefresh() {
-    return Future.delayed(Duration(seconds: 5));
+    return ref.watch(timelineProvider.notifier).refresh();
   }
 
   @override
