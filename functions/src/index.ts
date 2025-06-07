@@ -55,3 +55,41 @@ export const onVideoCreated = functions.firestore.onDocumentCreated(
       });
   }
 );
+
+export const onLikedCreated = functions.firestore.onDocumentCreated(
+  {
+    document: "likes/{likeId}",
+    region: "asia-northeast3",
+  },
+  async (event) => {
+    const snapshot = event.data;
+    if (!snapshot) return;
+    const db = admin.firestore();
+    const [videoId, _] = snapshot.id.split("000");
+    await db
+      .collection("videos")
+      .doc(videoId)
+      .update({
+        likes: admin.firestore.FieldValue.increment(1),
+      });
+  }
+);
+
+export const onLikedRemoved = functions.firestore.onDocumentDeleted(
+  {
+    document: "likes/{likeId}",
+    region: "asia-northeast3",
+  },
+  async (event) => {
+    const snapshot = event.data;
+    if (!snapshot) return;
+    const db = admin.firestore();
+    const [videoId, _] = snapshot.id.split("000");
+    await db
+      .collection("videos")
+      .doc(videoId)
+      .update({
+        likes: admin.firestore.FieldValue.increment(-1),
+      });
+  }
+);
