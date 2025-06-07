@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktong/constants/gaps.dart';
 import 'package:tiktong/constants/sizes.dart';
+import 'package:tiktong/features/inbox/view_models/messages_view_model.dart';
 
-class ChatDetailScreen extends StatefulWidget {
+class ChatDetailScreen extends ConsumerStatefulWidget {
   static const String routeName = "chatDetail";
   static const String routeURL = ":chatId";
   final String chatId;
@@ -11,12 +13,26 @@ class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key, required this.chatId});
 
   @override
-  State<ChatDetailScreen> createState() => _ChatDetailScreenState();
+  ConsumerState<ChatDetailScreen> createState() => _ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
+  final TextEditingController _editingController = TextEditingController();
+
+  void _onSendPress() {
+    final text = _editingController.text;
+    if (text == "") {
+      return;
+    }
+
+    ref.read(messagesProvider.notifier).sendMessage(text);
+    _editingController.text = "";
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(messagesProvider).isLoading;
+
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
@@ -126,6 +142,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     child: Padding(
                       padding: EdgeInsets.only(left: Sizes.size10),
                       child: TextField(
+                        controller: _editingController,
                         decoration: InputDecoration(
                           hintText: "Send a message...",
                           filled: true,
@@ -144,15 +161,20 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     ),
                   ),
                   Gaps.h20,
-                  Container(
-                    padding: EdgeInsets.all(Sizes.size14),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey.shade400,
-                    ),
-                    child: const FaIcon(
-                      FontAwesomeIcons.paperPlane,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: isLoading ? null : _onSendPress,
+                    child: Container(
+                      padding: EdgeInsets.all(Sizes.size14),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey.shade400,
+                      ),
+                      child: FaIcon(
+                        isLoading
+                            ? FontAwesomeIcons.hourglass
+                            : FontAwesomeIcons.paperPlane,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
